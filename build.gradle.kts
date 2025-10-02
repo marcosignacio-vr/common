@@ -1,8 +1,9 @@
 plugins {
 	kotlin("jvm") version "1.9.25"
 	kotlin("plugin.spring") version "1.9.25"
-	id("org.springframework.boot") version "3.3.9"
+	id("org.springframework.boot") version "3.5.6"
 	id("io.spring.dependency-management") version "1.1.7"
+	`maven-publish`
 }
 
 group = "com.marcosignaciovr"
@@ -13,6 +14,26 @@ java {
 		languageVersion = JavaLanguageVersion.of(17)
 	}
 }
+
+publishing {
+	publications {
+		create<MavenPublication>("maven") {
+			from(components["java"]) // incluye tu código Kotlin compilado
+			artifactId = "common"
+		}
+	}
+	repositories {
+		maven {
+			name = "GitHubPackages"
+			url = uri("https://maven.pkg.github.com/usuario/repositorio")
+			credentials {
+				username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_ACTOR")
+				password = project.findProperty("gpr.token") as String? ?: System.getenv("GITHUB_TOKEN")
+			}
+		}
+	}
+}
+
 
 repositories {
 	mavenCentral()
