@@ -6,7 +6,7 @@ plugins {
 	`maven-publish`
 }
 
-group = "com.marcosignaciovr"
+group = "com.github.marcosignacio-vr"
 version = "0.0.1"
 
 java {
@@ -20,15 +20,17 @@ publishing {
 		create<MavenPublication>("maven") {
 			from(components["java"]) // incluye tu código Kotlin compilado
 			artifactId = "common"
+			groupId ="com.marcosignacio-vr"
+			version = "0.0.1"
 		}
 	}
 	repositories {
 		maven {
 			name = "GitHubPackages"
-			url = uri("https://github.com/marcosignacio-vr/common")
+			url = uri("https://maven.pkg.github.com/marcosignacio-vr/common")
 			credentials {
-				username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_ACTOR")
-				password = project.findProperty("gpr.token") as String? ?: System.getenv("GITHUB_TOKEN")
+				username = "marcosignacio-vr"
+				password = ""
 			}
 		}
 	}
