@@ -7,12 +7,14 @@ plugins {
 }
 
 group = "com.github.marcosignacio-vr"
-version = "0.0.1"
+version = "0.0.2"
 
 java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
 	}
+	withSourcesJar()
+	withJavadocJar()
 }
 
 publishing {
@@ -20,8 +22,8 @@ publishing {
 		create<MavenPublication>("maven") {
 			from(components["java"]) // incluye tu código Kotlin compilado
 			artifactId = "common"
-			groupId ="com.marcosignacio-vr"
-			version = "0.0.1"
+			groupId ="com.github.marcosignacio-vr"
+			version = "0.0.2"
 		}
 	}
 	repositories {
